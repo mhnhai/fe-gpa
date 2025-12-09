@@ -252,21 +252,108 @@ select.input-field option {
   border: 1px solid var(--color-border) !important;
 }
 
-/* Light theme text adjustments */
+/* ========== LIGHT THEME OVERRIDES ========== */
+
+/* Text colors */
+.light .text-white { color: #1e293b; }
 .light .text-slate-300 { color: #334155; }
 .light .text-slate-400 { color: #475569; }
 .light .text-slate-500 { color: #64748b; }
-.light .text-white { color: #0f172a; }
-.light .bg-slate-800\/50 { background: rgba(241, 245, 249, 0.8); }
-.light .bg-slate-900\/50 { background: rgba(226, 232, 240, 0.8); }
-.light .border-slate-700\/50 { border-color: rgba(148, 163, 184, 0.3); }
-.light .border-slate-700 { border-color: #cbd5e1; }
+.light .text-slate-600 { color: #475569; }
 
-/* Light theme hover adjustments */
-.light .hover\:text-white:hover { color: #0f172a; }
-.light .hover\:bg-slate-800\/50:hover { background: rgba(226, 232, 240, 0.8); }
+/* Keep gradient text working in light mode */
+.light .bg-clip-text.text-transparent { color: transparent; }
 
-/* Light theme modal */
-.light .bg-slate-900\/80 { background: rgba(148, 163, 184, 0.5); }
+/* Background colors */
 .light .bg-slate-800 { background: #ffffff; }
 .light .bg-slate-900 { background: #f8fafc; }
+.light .bg-slate-800\/30 { background: rgba(241, 245, 249, 0.8); }
+.light .bg-slate-800\/40 { background: rgba(255, 255, 255, 0.9); }
+.light .bg-slate-800\/50 { background: rgba(241, 245, 249, 0.8); }
+.light .bg-slate-900\/50 { background: rgba(226, 232, 240, 0.8); }
+.light .bg-slate-700\/50 { background: rgba(203, 213, 225, 0.5); }
+
+/* Border colors */
+.light .border-slate-700 { border-color: #e2e8f0; }
+.light .border-slate-700\/30 { border-color: rgba(203, 213, 225, 0.5); }
+.light .border-slate-700\/50 { border-color: rgba(203, 213, 225, 0.6); }
+
+/* Hover states */
+.light .hover\:text-white:hover { color: #0f172a; }
+.light .hover\:bg-slate-700\/50:hover { background: rgba(226, 232, 240, 0.8); }
+.light .hover\:bg-slate-800\/50:hover { background: rgba(226, 232, 240, 0.8); }
+.light .hover\:bg-slate-800\/30:hover { background: rgba(226, 232, 240, 0.6); }
+.light .hover\:border-primary-500\/30:hover { border-color: rgba(14, 165, 233, 0.4); }
+
+/* Modal overlay */
+.light .bg-black\/60 { background: rgba(100, 116, 139, 0.5); }
+
+/* Empty state */
+.light .bg-slate-800.flex.items-center.justify-center { background: #f1f5f9; }
+
+/* Specific component overrides */
+.light .glass-card .bg-slate-800\/40 { 
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Primary colors should stay vibrant */
+.light .text-primary-300 { color: #0284c7; }
+.light .text-primary-400 { color: #0ea5e9; }
+
+/* Keep action button colors */
+.light .text-blue-400 { color: #2563eb; }
+.light .text-red-400 { color: #dc2626; }
+.light .hover\:bg-blue-500\/10:hover { background: rgba(37, 99, 235, 0.1); }
+.light .hover\:bg-red-500\/10:hover { background: rgba(220, 38, 38, 0.1); }
+
+/* Stats card background */
+.light .bg-slate-700\/50 { background: rgba(226, 232, 240, 0.6); }
+
+/* Dropdown/Select */
+.light select option { background: #ffffff; }
+
+/* Table rows */
+.light tr.border-b { border-color: #e2e8f0; }
+.light tr:hover { background: rgba(241, 245, 249, 0.5); }
+
+/* Navigation active state */
+.light .bg-primary-500\/20 { background: rgba(14, 165, 233, 0.15); }
+.light .border-primary-500\/30 { border-color: rgba(14, 165, 233, 0.35); }
+
+/* Input placeholder */
+.light input::placeholder { color: #94a3b8; }
+
+/* Empty state icons */
+.light .rounded-full.bg-slate-800 { background: #e2e8f0; }
+.light .text-slate-600 { color: #64748b; }
+
+/* Preview box in modal */
+.light .bg-primary-500\/10 { background: rgba(14, 165, 233, 0.08); }
+
+/* Hover state for semester card */
+.light .hover\:text-primary-300:hover { color: #0284c7; }
+
+/* Fix amber hover for theme toggle */
+.light .hover\:text-amber-400:hover { color: #d97706; }
+.light .hover\:bg-amber-500\/10:hover { background: rgba(245, 158, 11, 0.1); }
+
+/* Progress bar background */
+.light .bg-slate-700\/50.rounded-full { background: #e2e8f0; }
+
+/* Fix user avatar text */
+.light .bg-gradient-to-br .text-white { color: #ffffff !important; }
+
+/* Header logo text - keep gradient */
+.light .font-display.bg-gradient-to-r { 
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Fix icons in gradient backgrounds to stay white */
+.light .rounded-xl.bg-gradient-to-br .text-white,
+.light .rounded-2xl.bg-gradient-to-br .text-white,
+.light .rounded-full.bg-gradient-to-br .text-white {
+  color: #ffffff !important;
+}

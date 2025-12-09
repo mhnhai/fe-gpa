@@ -107,32 +107,28 @@ function GradeTable() {
         transition={{ delay: 0.2 }}
         className="glass-card rounded-2xl p-6"
       >
-        <div className="flex items-start gap-4">
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-3">
-              Công thức tính điểm trung bình chung
-            </h3>
-            <div className="glass rounded-xl p-4 mb-4">
-              <div className="text-center">
-                <p className="text-2xl font-mono text-primary-300 mb-2">
-                  ĐTBCHK = Σ(a<sub>i</sub> × X<sub>i</sub>) / Σ(a<sub>i</sub>)
-                </p>
-              </div>
-            </div>
-            <div className="space-y-2 text-slate-300">
-              <p className="flex items-start gap-2">
-                <span className="text-primary-400 font-mono">ĐTBCHK</span>
-                <span>: Điểm trung bình chung học kỳ</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="text-primary-400 font-mono">a<sub>i</sub></span>
-                <span>: Số tín chỉ của môn học thứ i</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="text-primary-400 font-mono">X<sub>i</sub></span>
-                <span>: Điểm hệ 4 của môn học thứ i</span>
-              </p>
-            </div>
+        <div className="text-center">
+          <h3 className="font-semibold text-white text-lg mb-3">
+            Công thức tính điểm trung bình chung
+          </h3>
+          <div className="glass rounded-xl p-4 mb-4 inline-block">
+            <p className="text-2xl font-mono text-primary-300">
+              ĐTBCHK = Σ(a<sub>i</sub> × X<sub>i</sub>) / Σ(a<sub>i</sub>)
+            </p>
+          </div>
+          <div className="space-y-2 text-slate-300 max-w-md mx-auto text-left">
+            <p className="flex items-start gap-2 justify-center">
+              <span className="text-primary-400 font-mono">ĐTBCHK</span>
+              <span>: Điểm trung bình chung học kỳ</span>
+            </p>
+            <p className="flex items-start gap-2 justify-center">
+              <span className="text-primary-400 font-mono">a<sub>i</sub></span>
+              <span>: Số tín chỉ của môn học thứ i</span>
+            </p>
+            <p className="flex items-start gap-2 justify-center">
+              <span className="text-primary-400 font-mono">X<sub>i</sub></span>
+              <span>: Điểm hệ 4 của môn học thứ i</span>
+            </p>
           </div>
         </div>
       </motion.div>
@@ -144,55 +140,53 @@ function GradeTable() {
         transition={{ delay: 0.3 }}
         className="glass-card rounded-2xl p-6"
       >
-        <div className="flex items-start gap-4">
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-4">
-              Ví dụ minh họa
-            </h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-slate-700/50">
-                    <th className="text-left py-2 px-3 text-slate-400">Môn học</th>
-                    <th className="text-center py-2 px-3 text-slate-400">Tín chỉ (a)</th>
-                    <th className="text-center py-2 px-3 text-slate-400">Điểm hệ 4 (X)</th>
-                    <th className="text-center py-2 px-3 text-slate-400">a × X</th>
-                  </tr>
-                </thead>
-                <tbody className="text-slate-300">
-                  <tr className="border-b border-slate-700/30">
-                    <td className="py-2 px-3">Toán cao cấp</td>
-                    <td className="text-center py-2 px-3">3</td>
-                    <td className="text-center py-2 px-3 text-green-400">3.5</td>
-                    <td className="text-center py-2 px-3 font-mono">10.5</td>
-                  </tr>
-                  <tr className="border-b border-slate-700/30">
-                    <td className="py-2 px-3">Lập trình C</td>
-                    <td className="text-center py-2 px-3">4</td>
-                    <td className="text-center py-2 px-3 text-emerald-400">4.0</td>
-                    <td className="text-center py-2 px-3 font-mono">16.0</td>
-                  </tr>
-                  <tr className="border-b border-slate-700/30">
-                    <td className="py-2 px-3">Vật lý đại cương</td>
-                    <td className="text-center py-2 px-3">3</td>
-                    <td className="text-center py-2 px-3 text-lime-400">3.0</td>
-                    <td className="text-center py-2 px-3 font-mono">9.0</td>
-                  </tr>
-                  <tr className="bg-slate-800/30">
-                    <td className="py-3 px-3 font-semibold text-white">Tổng</td>
-                    <td className="text-center py-3 px-3 font-semibold text-white">10</td>
-                    <td className="text-center py-3 px-3"></td>
-                    <td className="text-center py-3 px-3 font-mono font-semibold text-white">35.5</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-4 p-4 glass rounded-xl">
-              <p className="text-slate-300">
-                <span className="font-semibold text-white">Kết quả: </span>
-                ĐTBCHK = 35.5 / 10 = <span className="text-2xl font-bold text-primary-400 font-mono">3.55</span>
-              </p>
-            </div>
+        <div className="text-center">
+          <h3 className="font-semibold text-white text-lg mb-4">
+            Ví dụ minh họa
+          </h3>
+          <div className="overflow-x-auto inline-block w-full max-w-lg">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-700/50">
+                  <th className="text-left py-2 px-3 text-slate-400">Môn học</th>
+                  <th className="text-center py-2 px-3 text-slate-400">Tín chỉ (a)</th>
+                  <th className="text-center py-2 px-3 text-slate-400">Điểm hệ 4 (X)</th>
+                  <th className="text-center py-2 px-3 text-slate-400">a × X</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-300">
+                <tr className="border-b border-slate-700/30">
+                  <td className="py-2 px-3 text-left">Toán cao cấp</td>
+                  <td className="text-center py-2 px-3">3</td>
+                  <td className="text-center py-2 px-3 text-green-400">3.5</td>
+                  <td className="text-center py-2 px-3 font-mono">10.5</td>
+                </tr>
+                <tr className="border-b border-slate-700/30">
+                  <td className="py-2 px-3 text-left">Lập trình C</td>
+                  <td className="text-center py-2 px-3">4</td>
+                  <td className="text-center py-2 px-3 text-emerald-400">4.0</td>
+                  <td className="text-center py-2 px-3 font-mono">16.0</td>
+                </tr>
+                <tr className="border-b border-slate-700/30">
+                  <td className="py-2 px-3 text-left">Vật lý đại cương</td>
+                  <td className="text-center py-2 px-3">3</td>
+                  <td className="text-center py-2 px-3 text-lime-400">3.0</td>
+                  <td className="text-center py-2 px-3 font-mono">9.0</td>
+                </tr>
+                <tr className="bg-slate-800/30">
+                  <td className="py-3 px-3 font-semibold text-white text-left">Tổng</td>
+                  <td className="text-center py-3 px-3 font-semibold text-white">10</td>
+                  <td className="text-center py-3 px-3"></td>
+                  <td className="text-center py-3 px-3 font-mono font-semibold text-white">35.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4 p-4 glass rounded-xl max-w-lg mx-auto">
+            <p className="text-slate-300">
+              <span className="font-semibold text-white">Kết quả: </span>
+              ĐTBCHK = 35.5 / 10 = <span className="text-2xl font-bold text-primary-400 font-mono">3.55</span>
+            </p>
           </div>
         </div>
       </motion.div>
