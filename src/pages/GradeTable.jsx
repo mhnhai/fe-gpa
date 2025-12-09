@@ -108,9 +108,6 @@ function GradeTable() {
         className="glass-card rounded-2xl p-6"
       >
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-emerald/20 to-green-500/20 flex items-center justify-center flex-shrink-0">
-            <Calculator className="w-6 h-6 text-accent-emerald" />
-          </div>
           <div>
             <h3 className="font-semibold text-white text-lg mb-3">
               Công thức tính điểm trung bình chung
@@ -148,9 +145,6 @@ function GradeTable() {
         className="glass-card rounded-2xl p-6"
       >
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-violet/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
-            <Info className="w-6 h-6 text-accent-violet" />
-          </div>
           <div>
             <h3 className="font-semibold text-white text-lg mb-4">
               Ví dụ minh họa
