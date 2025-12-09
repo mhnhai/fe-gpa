@@ -161,7 +161,6 @@ function GradeTable() {
                   <tr className="border-b border-slate-700/50">
                     <th className="text-left py-2 px-3 text-slate-400">Môn học</th>
                     <th className="text-center py-2 px-3 text-slate-400">Tín chỉ (a)</th>
-                    <th className="text-center py-2 px-3 text-slate-400">Điểm hệ 10</th>
                     <th className="text-center py-2 px-3 text-slate-400">Điểm hệ 4 (X)</th>
                     <th className="text-center py-2 px-3 text-slate-400">a × X</th>
                   </tr>
@@ -170,28 +169,24 @@ function GradeTable() {
                   <tr className="border-b border-slate-700/30">
                     <td className="py-2 px-3">Toán cao cấp</td>
                     <td className="text-center py-2 px-3">3</td>
-                    <td className="text-center py-2 px-3">8.5</td>
                     <td className="text-center py-2 px-3 text-green-400">3.5</td>
                     <td className="text-center py-2 px-3 font-mono">10.5</td>
                   </tr>
                   <tr className="border-b border-slate-700/30">
                     <td className="py-2 px-3">Lập trình C</td>
                     <td className="text-center py-2 px-3">4</td>
-                    <td className="text-center py-2 px-3">9.0</td>
                     <td className="text-center py-2 px-3 text-emerald-400">4.0</td>
                     <td className="text-center py-2 px-3 font-mono">16.0</td>
                   </tr>
                   <tr className="border-b border-slate-700/30">
                     <td className="py-2 px-3">Vật lý đại cương</td>
                     <td className="text-center py-2 px-3">3</td>
-                    <td className="text-center py-2 px-3">7.2</td>
                     <td className="text-center py-2 px-3 text-lime-400">3.0</td>
                     <td className="text-center py-2 px-3 font-mono">9.0</td>
                   </tr>
                   <tr className="bg-slate-800/30">
                     <td className="py-3 px-3 font-semibold text-white">Tổng</td>
                     <td className="text-center py-3 px-3 font-semibold text-white">10</td>
-                    <td className="text-center py-3 px-3"></td>
                     <td className="text-center py-3 px-3"></td>
                     <td className="text-center py-3 px-3 font-mono font-semibold text-white">35.5</td>
                   </tr>
