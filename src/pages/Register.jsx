@@ -94,7 +94,6 @@ function Register() {
                 Tên đăng nhập <span className="text-red-400">*</span>
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
                   type="text"
                   name="username"
@@ -111,7 +110,6 @@ function Register() {
                 Email <span className="text-red-400">*</span>
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
                   type="email"
                   name="email"
@@ -128,7 +126,6 @@ function Register() {
                 Họ và tên
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
                   type="text"
                   name="full_name"
@@ -145,7 +142,6 @@ function Register() {
                 Mật khẩu <span className="text-red-400">*</span>
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
                   type="password"
                   name="password"
@@ -162,7 +158,6 @@ function Register() {
                 Xác nhận mật khẩu <span className="text-red-400">*</span>
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
                   type="password"
                   name="confirmPassword"
