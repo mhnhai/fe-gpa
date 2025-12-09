@@ -1,16 +1,20 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, 
   Table, 
   LogOut, 
   GraduationCap,
-  User
+  User,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 function Layout() {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   const navItems = [
@@ -58,7 +62,20 @@ function Layout() {
             </nav>
 
             {/* User menu */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+                title={theme === 'dark' ? 'Chuyển sang sáng' : 'Chuyển sang tối'}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+
               <div className="flex items-center gap-2 text-slate-300">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-emerald to-primary-500 flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />

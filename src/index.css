@@ -2,10 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --gradient-primary: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e1b4b 100%);
+/* Dark theme (default) */
+:root,
+.dark {
+  --bg-gradient: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e1b4b 100%);
   --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
   --glow-primary: 0 0 40px rgba(56, 189, 248, 0.15);
+  
+  /* Colors */
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: rgba(15, 23, 42, 0.6);
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #64748b;
+  --color-border: rgba(148, 163, 184, 0.2);
+  --color-border-hover: rgba(148, 163, 184, 0.4);
+  
+  /* Glass */
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(148, 163, 184, 0.1);
+  
+  /* Buttons */
+  --btn-secondary-bg: rgba(30, 41, 59, 0.8);
+  --btn-secondary-hover: rgba(51, 65, 85, 0.8);
+  
+  /* Scrollbar */
+  --scrollbar-track: #0f172a;
+  
+  /* Gradient border */
+  --gradient-border-bg: linear-gradient(145deg, #1e293b, #0f172a);
+}
+
+/* Light theme */
+.light {
+  --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #ede9fe 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
+  --glow-primary: 0 4px 20px rgba(14, 165, 233, 0.1);
+  
+  /* Colors */
+  --color-bg: #f8fafc;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: rgba(241, 245, 249, 0.9);
+  --color-text: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-border: rgba(71, 85, 105, 0.2);
+  --color-border-hover: rgba(71, 85, 105, 0.4);
+  
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(71, 85, 105, 0.15);
+  
+  /* Buttons */
+  --btn-secondary-bg: rgba(241, 245, 249, 0.9);
+  --btn-secondary-hover: rgba(226, 232, 240, 0.9);
+  
+  /* Scrollbar */
+  --scrollbar-track: #e2e8f0;
+  
+  /* Gradient border */
+  --gradient-border-bg: linear-gradient(145deg, #ffffff, #f1f5f9);
 }
 
 * {
@@ -16,10 +73,11 @@
 
 body {
   font-family: 'Source Sans 3', sans-serif;
-  background: var(--gradient-primary);
+  background: var(--bg-gradient);
   min-height: 100vh;
-  color: #f8fafc;
+  color: var(--color-text);
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -28,7 +86,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -51,22 +109,29 @@ body {
 
 /* Glass morphism effect */
 .glass {
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  border: 1px solid var(--glass-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-card {
   background: var(--gradient-card);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  border: 1px solid var(--glass-border);
   box-shadow: var(--glow-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Light theme specific card shadow */
+.light .glass-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Animated gradient border */
 .gradient-border {
   position: relative;
-  background: linear-gradient(145deg, #1e293b, #0f172a);
+  background: var(--gradient-border-bg);
 }
 
 .gradient-border::before {
@@ -88,6 +153,7 @@ body {
 .btn-primary {
   @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
   background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  color: white;
   box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
 }
 
@@ -98,20 +164,22 @@ body {
 
 .btn-secondary {
   @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--btn-secondary-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
 .btn-secondary:hover {
-  background: rgba(51, 65, 85, 0.8);
-  border-color: rgba(148, 163, 184, 0.4);
+  background: var(--btn-secondary-hover);
+  border-color: var(--color-border-hover);
 }
 
 /* Input styles */
 .input-field {
   @apply w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
 .input-field:focus {
@@ -120,10 +188,21 @@ body {
 }
 
 .input-field::placeholder {
-  color: #64748b;
+  color: var(--color-text-muted);
 }
 
-/* Grade colors */
+/* Select styles for light/dark */
+select.input-field {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text);
+}
+
+select.input-field option {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+/* Grade colors - same for both themes for consistency */
 .grade-a { color: #10b981; }
 .grade-b-plus { color: #22c55e; }
 .grade-b { color: #84cc16; }
@@ -165,3 +244,29 @@ body {
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
 
+/* Toast theme */
+.toast-theme {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+/* Light theme text adjustments */
+.light .text-slate-300 { color: #334155; }
+.light .text-slate-400 { color: #475569; }
+.light .text-slate-500 { color: #64748b; }
+.light .text-white { color: #0f172a; }
+.light .bg-slate-800\/50 { background: rgba(241, 245, 249, 0.8); }
+.light .bg-slate-900\/50 { background: rgba(226, 232, 240, 0.8); }
+.light .border-slate-700\/50 { border-color: rgba(148, 163, 184, 0.3); }
+.light .border-slate-700 { border-color: #cbd5e1; }
+
+/* Light theme hover adjustments */
+.light .hover\:text-white:hover { color: #0f172a; }
+.light .hover\:bg-slate-800\/50:hover { background: rgba(226, 232, 240, 0.8); }
+
+/* Light theme modal */
+.light .bg-slate-900\/80 { background: rgba(148, 163, 184, 0.5); }
+.light .bg-slate-800 { background: #ffffff; }
+.light .bg-slate-900 { background: #f8fafc; }
