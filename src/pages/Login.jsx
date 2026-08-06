@@ -63,7 +63,7 @@ function Login() {
 
         {/* Login Form */}
         <div className="glass-card rounded-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Tên đăng nhập
