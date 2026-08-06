@@ -63,7 +63,7 @@ function Login() {
 
         {/* Login Form */}
         <div className="glass-card rounded-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
+          <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Tên đăng nhập
@@ -74,6 +74,8 @@ function Login() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="input-field pl-12"
+                  name="username"
+                  autoComplete="username"
                   placeholder="Nhập tên đăng nhập"
                 />
               </div>
@@ -89,6 +91,8 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="input-field pl-12"
+                  name="password"
+                  autoComplete="current-password"
                   placeholder="Nhập mật khẩu"
                 />
               </div>
