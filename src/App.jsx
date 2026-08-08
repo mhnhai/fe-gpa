@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import SemesterDetail from './pages/SemesterDetail';
 import GradeTable from './pages/GradeTable';
@@ -47,6 +48,11 @@ function App() {
         <Route path="/register" element={
           <PublicRoute>
             <Register />
+          </PublicRoute>
+        } />
+        <Route path="/forgot-password" element={
+          <PublicRoute>
+            <ForgotPassword />
           </PublicRoute>
         } />
         <Route path="/" element={

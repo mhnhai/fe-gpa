@@ -28,9 +28,18 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+      const url = error.config?.url || '';
+      const isAuthPublic =
+        url.includes('/api/auth/login') ||
+        url.includes('/api/auth/register') ||
+        url.includes('/api/auth/forgot-password') ||
+        url.includes('/api/auth/verify-otp') ||
+        url.includes('/api/auth/reset-password');
+      if (!isAuthPublic) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
@@ -50,6 +59,9 @@ export const authAPI = {
     });
   },
   getMe: () => api.get('/api/auth/me'),
+  forgotPassword: (email) => api.post('/api/auth/forgot-password', { email }),
+  verifyOtp: (email, otp) => api.post('/api/auth/verify-otp', { email, otp }),
+  resetPassword: (data) => api.post('/api/auth/reset-password', data),
 };
 
 // Semester API

@@ -96,6 +96,14 @@ function Login() {
                   placeholder="Nhập mật khẩu"
                 />
               </div>
+              <div className="mt-2 text-right">
+                <Link
+                  to="/forgot-password"
+                  className="text-sm text-primary-400 hover:text-primary-300"
+                >
+                  Quên mật khẩu?
+                </Link>
+              </div>
             </div>
 
             <button
