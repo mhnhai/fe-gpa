@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { cohortAPI, majorAPI } from '../api/axios';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { GraduationCap, Mail, Lock, User, UserPlus, Loader2 } from 'lucide-react';
+import { GraduationCap, UserPlus, Loader2 } from 'lucide-react';
+
+function getErrorMessage(error, fallback) {
+  const detail = error.response?.data?.detail;
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    return detail.map((item) => item.msg || JSON.stringify(item)).join(', ');
+  }
+  return fallback;
+}
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -12,10 +22,34 @@ function Register() {
     full_name: '',
     password: '',
     confirmPassword: '',
+    cohort_id: '',
+    major_id: '',
   });
+  const [cohorts, setCohorts] = useState([]);
+  const [majors, setMajors] = useState([]);
+  const [optionsLoading, setOptionsLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadOptions = async () => {
+      setOptionsLoading(true);
+      try {
+        const [cohortRes, majorRes] = await Promise.all([
+          cohortAPI.getAll(),
+          majorAPI.getAll('specific'),
+        ]);
+        setCohorts(cohortRes.data || []);
+        setMajors(majorRes.data || []);
+      } catch (error) {
+        toast.error('Không tải được danh sách khóa học / ngành học');
+      } finally {
+        setOptionsLoading(false);
+      }
+    };
+    loadOptions();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,9 +57,14 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.username || !formData.email || !formData.password) {
       toast.error('Vui lòng nhập đầy đủ thông tin bắt buộc');
+      return;
+    }
+
+    if (!formData.cohort_id || !formData.major_id) {
+      toast.error('Vui lòng chọn khóa học và ngành học');
       return;
     }
 
@@ -44,13 +83,15 @@ function Register() {
       await register({
         username: formData.username,
         email: formData.email,
-        full_name: formData.full_name,
+        full_name: formData.full_name || null,
         password: formData.password,
+        cohort_id: Number(formData.cohort_id),
+        major_id: Number(formData.major_id),
       });
       toast.success('Đăng ký thành công! Vui lòng đăng nhập.');
       navigate('/login');
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Đăng ký thất bại');
+      toast.error(getErrorMessage(error, 'Đăng ký thất bại'));
     } finally {
       setLoading(false);
     }
@@ -58,10 +99,12 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8">
-      {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent-emerald/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div
+          className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-slow"
+          style={{ animationDelay: '2s' }}
+        />
       </div>
 
       <motion.div
@@ -70,7 +113,6 @@ function Register() {
         transition={{ duration: 0.6 }}
         className="w-full max-w-md relative z-10"
       >
-        {/* Logo */}
         <div className="text-center mb-8">
           <motion.div
             initial={{ scale: 0 }}
@@ -86,92 +128,129 @@ function Register() {
           <p className="text-slate-400">Bắt đầu quản lý điểm số của bạn</p>
         </div>
 
-        {/* Register Form */}
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Tên đăng nhập <span className="text-red-400">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="input-field pl-12"
-                  placeholder="Nhập tên đăng nhập"
-                />
-              </div>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="input-field"
+                placeholder="Nhập tên đăng nhập"
+              />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Email <span className="text-red-400">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input-field pl-12"
-                  placeholder="example@email.com"
-                />
-              </div>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="input-field"
+                placeholder="example@email.com"
+              />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Họ và tên
               </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="full_name"
-                  value={formData.full_name}
-                  onChange={handleChange}
-                  className="input-field pl-12"
-                  placeholder="Nguyễn Văn A"
-                />
-              </div>
+              <input
+                type="text"
+                name="full_name"
+                value={formData.full_name}
+                onChange={handleChange}
+                className="input-field"
+                placeholder="Nguyễn Văn A"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Khóa học <span className="text-red-400">*</span>
+              </label>
+              <select
+                name="cohort_id"
+                value={formData.cohort_id}
+                onChange={handleChange}
+                className="input-field"
+                disabled={optionsLoading}
+                required
+              >
+                <option value="">
+                  {optionsLoading ? 'Đang tải...' : 'Chọn khóa học'}
+                </option>
+                {cohorts.map((cohort) => (
+                  <option key={cohort.id} value={cohort.id}>
+                    {cohort.code}
+                    {cohort.name ? ` - ${cohort.name}` : ''}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Ngành học <span className="text-red-400">*</span>
+              </label>
+              <select
+                name="major_id"
+                value={formData.major_id}
+                onChange={handleChange}
+                className="input-field"
+                disabled={optionsLoading}
+                required
+              >
+                <option value="">
+                  {optionsLoading ? 'Đang tải...' : 'Chọn ngành học'}
+                </option>
+                {majors.map((major) => (
+                  <option key={major.id} value={major.id}>
+                    {major.name}
+                    {major.code ? ` (${major.code})` : ''}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Mật khẩu <span className="text-red-400">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="input-field pl-12"
-                  placeholder="Ít nhất 6 ký tự"
-                />
-              </div>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="input-field"
+                placeholder="Ít nhất 6 ký tự"
+              />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Xác nhận mật khẩu <span className="text-red-400">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className="input-field pl-12"
-                  placeholder="Nhập lại mật khẩu"
-                />
-              </div>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="input-field"
+                placeholder="Nhập lại mật khẩu"
+              />
             </div>
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || optionsLoading}
               className="btn-primary w-full flex items-center justify-center gap-2"
             >
               {loading ? (
@@ -203,4 +282,3 @@ function Register() {
 }
 
 export default Register;
-

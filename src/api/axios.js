@@ -83,3 +83,16 @@ export const catalogAPI = {
   getCount: () => api.get('/api/catalog/count'),
 };
 
+// Cohort API (khóa học)
+export const cohortAPI = {
+  getAll: () => api.get('/api/cohorts/'),
+};
+
+// Major API (ngành học)
+export const majorAPI = {
+  getAll: (majorType = '') =>
+    api.get('/api/majors/', {
+      params: majorType ? { major_type: majorType } : undefined,
+    }),
+};
+
