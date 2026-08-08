@@ -42,8 +42,14 @@ function GradeTable() {
           Quy đổi điểm số thang 10 sang điểm chữ và thang điểm 4
         </p>
       </motion.div>
-
-      {/* Grade Table */}
+      <motion.div>
+        {/* Không cần nhập 24TC bao gồm 8TC GDQP, 10TC AVCB, 3TC Thể chất, 3TC Tin học */}
+        <div className="glass-card rounded-2xl p-6">
+          <p className="text-slate-300">
+            Người dùng không cần nhập 24TC bao gồm 8TC GDQP, 10TC AVCB, 3TC Thể chất, 3TC Tin học
+          </p>
+        </div>
+      </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
