@@ -27,32 +27,57 @@ function Register() {
   });
   const [cohorts, setCohorts] = useState([]);
   const [majors, setMajors] = useState([]);
-  const [optionsLoading, setOptionsLoading] = useState(true);
+  const [cohortsLoading, setCohortsLoading] = useState(true);
+  const [majorsLoading, setMajorsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadOptions = async () => {
-      setOptionsLoading(true);
+    const loadCohorts = async () => {
+      setCohortsLoading(true);
       try {
-        const [cohortRes, majorRes] = await Promise.all([
-          cohortAPI.getAll(),
-          majorAPI.getAll('specific'),
-        ]);
+        const cohortRes = await cohortAPI.getAll();
         setCohorts(cohortRes.data || []);
-        setMajors(majorRes.data || []);
       } catch (error) {
-        toast.error('Không tải được danh sách khóa học / ngành học');
+        toast.error('Không tải được danh sách khóa học');
       } finally {
-        setOptionsLoading(false);
+        setCohortsLoading(false);
       }
     };
-    loadOptions();
+    loadCohorts();
   }, []);
 
+  useEffect(() => {
+    const loadMajorsByCohort = async () => {
+      if (!formData.cohort_id) {
+        setMajors([]);
+        return;
+      }
+      setMajorsLoading(true);
+      try {
+        const majorRes = await majorAPI.getAll({
+          majorType: 'specific',
+          cohortId: Number(formData.cohort_id),
+        });
+        setMajors(majorRes.data || []);
+      } catch (error) {
+        setMajors([]);
+        toast.error('Không tải được ngành học của khóa này');
+      } finally {
+        setMajorsLoading(false);
+      }
+    };
+    loadMajorsByCohort();
+  }, [formData.cohort_id]);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'cohort_id') {
+      setFormData({ ...formData, cohort_id: value, major_id: '' });
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -181,11 +206,11 @@ function Register() {
                 value={formData.cohort_id}
                 onChange={handleChange}
                 className="input-field"
-                disabled={optionsLoading}
+                disabled={cohortsLoading}
                 required
               >
                 <option value="">
-                  {optionsLoading ? 'Đang tải...' : 'Chọn khóa học'}
+                  {cohortsLoading ? 'Đang tải...' : 'Chọn khóa học'}
                 </option>
                 {cohorts.map((cohort) => (
                   <option key={cohort.id} value={cohort.id}>
@@ -205,11 +230,17 @@ function Register() {
                 value={formData.major_id}
                 onChange={handleChange}
                 className="input-field"
-                disabled={optionsLoading}
+                disabled={!formData.cohort_id || majorsLoading}
                 required
               >
                 <option value="">
-                  {optionsLoading ? 'Đang tải...' : 'Chọn ngành học'}
+                  {!formData.cohort_id
+                    ? 'Chọn khóa học trước'
+                    : majorsLoading
+                      ? 'Đang tải ngành...'
+                      : majors.length === 0
+                        ? 'Khóa này chưa có ngành'
+                        : 'Chọn ngành học'}
                 </option>
                 {majors.map((major) => (
                   <option key={major.id} value={major.id}>
@@ -250,7 +281,7 @@ function Register() {
 
             <button
               type="submit"
-              disabled={loading || optionsLoading}
+              disabled={loading || cohortsLoading || majorsLoading}
               className="btn-primary w-full flex items-center justify-center gap-2"
             >
               {loading ? (

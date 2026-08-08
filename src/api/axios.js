@@ -90,9 +90,12 @@ export const cohortAPI = {
 
 // Major API (ngành học)
 export const majorAPI = {
-  getAll: (majorType = '') =>
+  getAll: (params = {}) =>
     api.get('/api/majors/', {
-      params: majorType ? { major_type: majorType } : undefined,
+      params: {
+        ...(params.majorType ? { major_type: params.majorType } : {}),
+        ...(params.cohortId ? { cohort_id: params.cohortId } : {}),
+      },
     }),
 };
 
