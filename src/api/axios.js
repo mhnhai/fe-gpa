@@ -59,6 +59,8 @@ export const authAPI = {
     });
   },
   getMe: () => api.get('/api/auth/me'),
+  updateProfile: (data) => api.patch('/api/auth/me', data),
+  changePassword: (data) => api.post('/api/auth/change-password', data),
   forgotPassword: (email) => api.post('/api/auth/forgot-password', { email }),
   verifyOtp: (email, otp) => api.post('/api/auth/verify-otp', { email, otp }),
   resetPassword: (data) => api.post('/api/auth/reset-password', data),

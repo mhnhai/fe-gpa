@@ -7,6 +7,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import SemesterDetail from './pages/SemesterDetail';
 import GradeTable from './pages/GradeTable';
+import Profile from './pages/Profile';
 
 function PrivateRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
@@ -64,6 +65,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="semester/:id" element={<SemesterDetail />} />
           <Route path="grade-table" element={<GradeTable />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

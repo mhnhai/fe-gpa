@@ -20,6 +20,7 @@ function Layout() {
   const navItems = [
     { path: '/dashboard', label: 'Bảng điểm', icon: LayoutDashboard },
     { path: '/grade-table', label: 'Bảng quy đổi', icon: Table },
+    { path: '/profile', label: 'Hồ sơ', icon: User },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -76,14 +77,14 @@ function Layout() {
                 )}
               </button>
 
-              <div className="flex items-center gap-2 text-slate-300">
+              <Link to="/profile" className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-emerald to-primary-500 flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
                 <span className="hidden sm:block font-medium">
                   {user?.full_name || user?.username}
                 </span>
-              </div>
+              </Link>
               <button
                 onClick={logout}
                 className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300"
